@@ -1,0 +1,15 @@
+
+도커 run
+docker run -d -p 80:80 -v /home/ubuntu/2021_DEV_HTML/:/usr/local/apache2/htdocs --name apacheweb2 httpd
+
+2. remove all dockers 
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi -f $(docker images -q)
+
+
+도커 접속
+docker exec -it [134adb2ba12 혹은 my-container] /bin/bash
+
+도커 이미지 만들기 
+docker build --tag myweb2 .
