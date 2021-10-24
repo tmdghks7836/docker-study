@@ -11,5 +11,25 @@ docker rmi -f $(docker images -q)
 도커 접속
 docker exec -it [134adb2ba12 혹은 my-container] /bin/bash
 
-도커 이미지 만들기 
+도커 이미지 만들기 (-f 설정이 없으면 기본적으로 Dockerfile을 바라본다.)
 docker build --tag myweb2 .
+docker build --tag myweb -f Dockerfile-ubuntu .
+
+도커 특정 컨테이너의 설정파일 가져오기
+docker cp mywebserver:/etc/apache2/sites-available/000-default.conf ./
+
+설정 파일을 도커 특정 컨테이너의 설정파일에 덮어씌우기 
+ docker cp 000-default.conf mywebserver:/etc/apache2/sites-available/000-default.conf
+
+도커 설정 중 컨테이너 안에서 새로운 작업을 하고 저장하고 싶을 때
+docker commit -m "add vim" containerName imageName
+
+컨테이너의 초기환경과 현재 환경 비교 
+ docker diff  containerName
+
+도커 이미지 설정파일 살펴보기 
+docker inspect imageName
+
+도커 로그
+docker logs
+
