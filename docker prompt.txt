@@ -1,14 +1,18 @@
 
 도커 run
+(-d 백그라운드 실행, -p  port설정, -v index.html 컨테이너 파일 링크, --name containerName , 뒤에 올 httpd는 이미지 이름, --rm 프로세스 종료시 삭제)                                                                               
 docker run -d -p 80:80 -v /home/ubuntu/2021_DEV_HTML/:/usr/local/apache2/htdocs --name apacheweb2 httpd
 
 2. remove all dockers 
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 docker rmi -f $(docker images -q)
+docker volume prune
 
+쓰지않는 이미지 볼륨 네트워크 삭제 
+docker system prune -a --volumes
 
-도커 접속
+도커 접속                                                   
 docker exec -it [134adb2ba12 혹은 my-container] /bin/bash
 
 도커 이미지 만들기 (-f 설정이 없으면 기본적으로 Dockerfile을 바라본다.)
@@ -19,7 +23,7 @@ docker build --tag myweb -f Dockerfile-ubuntu .
 docker cp mywebserver:/etc/apache2/sites-available/000-default.conf ./
 
 설정 파일을 도커 특정 컨테이너의 설정파일에 덮어씌우기 
- docker cp 000-default.conf mywebserver:/etc/apache2/sites-available/000-default.conf
+ docker cp 000-default.conf mywebserver:/etc/apache2/si tes-available/000-default.conf
 
 도커 설정 중 컨테이너 안에서 새로운 작업을 하고 저장하고 싶을 때
 docker commit -m "add vim" containerName imageName
@@ -32,4 +36,11 @@ docker inspect imageName
 
 도커 로그
 docker logs
+
+링크 옵션 
+docker run --rm -d -p 8888:8888 -v /home/ubuntu/2021_LEARN/:/home/jovyan/work 
+--link mydb:myjupyterdb jupyter/datascience-notebook
+
+도커 compose파일 가지고 실행 
+ docker-compose up -d
 

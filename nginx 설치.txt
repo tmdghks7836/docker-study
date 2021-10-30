@@ -1,0 +1,12 @@
+docker run -dit -p 9999:8080 --name myos ubuntu:20.04
+
+docker exec -it myos /bin/bash 
+
+apt-get update
+
+apt-get install nginx=1.18.0-0ubuntu1.2
+
+install vim
+
+참고 
+https://nginx/viraptor.info/

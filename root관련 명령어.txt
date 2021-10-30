@@ -1,0 +1,4 @@
+root계정에 패스워드 정의
+sudo passwd
+
+비밀번호 vkfl
